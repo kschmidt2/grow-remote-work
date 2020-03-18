@@ -27,13 +27,13 @@ Highcharts.setOptions({
     }
 });
 
-let chartId = document.getElementById("chart-container");
+let chartIdRemoteWork = document.getElementById("chart-container-remote-work");
 
 // checks for the chart ID and displays a backup image if the browser can't find it
 setTimeout(function() {
-    if(chartId.innerHTML === "") {
+    if(chartIdRemoteWork.innerHTML === "") {
         // console.log('noId');
-        let chartArea = document.getElementsByClassName("chart-area");
+        let chartArea = document.getElementsByClassName("chart-area-remote-work");
         for(var i = 0; i < chartArea.length; i++) {
             chartArea[i].style.display = "none";
         } 
@@ -45,18 +45,19 @@ setTimeout(function() {
 },500);
 
 function drawHighcharts() {
-    Highcharts.chart(chartId, {
+    Highcharts.chart(chartIdRemoteWork, {
         chart: {
-            type: 'bar',
+            type: 'column',
             styledMode: true,
             spacingBottom: 25,
-            spacingRight: 100
+            spacingRight: 100,
+            spacingLeft: 0
         }, 
         title: {
             text: null
         },
         data: {
-            googleSpreadsheetKey: '1YOKb5l2VM4aAB2r20N_1aT_1vEajYrP3U-U3A6lZbC0'
+            googleSpreadsheetKey: '1HNmrR402D3mBygSgGLAE1HQZqYEXpkUF0io1C8mtc3I'
         },
         // for bar charts only
         plotOptions: {
@@ -101,14 +102,17 @@ function drawHighcharts() {
             labels: {
                 useHTML: true,
                 overflow: 'allow'
-            }
+            },
+            max: 9000000,
+            tickAmount: 4
         },
         credits: {
             enabled: false
         },
         tooltip: {
             shadow: false,
-            padding: 10
+            padding: 10,
+            shared: true
         },
         responsive: {
             rules: [{
@@ -121,7 +125,8 @@ function drawHighcharts() {
                 },
                 legend: {
                     align: 'left',
-                    x: -18
+                    x: -8,
+                    itemMarginTop: 0
                 },
                 tooltip: {
                     enabled: false
